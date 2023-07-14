@@ -14,6 +14,13 @@ export class App extends Component {
       number: '',
     }
 
+    componentDidMount() {
+      const contacts = localStorage.getItem('contacts');
+      const parsedContacts = JSON.parse(contacts);
+      console.log(parsedContacts);
+      this.setState({contacts: parsedContacts});
+    }
+
     componentDidUpdate(prevProps, prevState) {
       // console.log("App componentDidUpdate");
       // console.log(prevState.contacts);
