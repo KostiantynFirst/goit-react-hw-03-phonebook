@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { AddContactForm } from "./AddContactForm/AddContactForm";
 import { ContactList } from "./Contacts/Contacts";
 import { PhonebookContainer, PhonebookHeadings, PhonebookContacts, PhonebookContactsHeading } from "../components/Phonebook/Phonebook.styled";
-import { Filter } from "components/Filter/Filter";
+import { Filter } from "./Filter/Filter";
 
 export class App extends Component {
 
@@ -14,13 +14,18 @@ export class App extends Component {
       number: '',
     }
 
+
     componentDidMount() {
       const contacts = localStorage.getItem('contacts');
       const parsedContacts = JSON.parse(contacts);
-      console.log(parsedContacts);
-      this.setState({contacts: parsedContacts});
+      // console.log(parsedContacts);
+      if (parsedContacts) {
+        this.setState({contacts: parsedContacts});
+      }
+      
     }
 
+    
     componentDidUpdate(prevProps, prevState) {
       // console.log("App componentDidUpdate");
       // console.log(prevState.contacts);
@@ -31,8 +36,6 @@ export class App extends Component {
         localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
       }
     }
-
-
 
   onInputName = (e, option) => {
       const { value } = e.currentTarget;
