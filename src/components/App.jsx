@@ -14,6 +14,19 @@ export class App extends Component {
       number: '',
     }
 
+    componentDidUpdate(prevProps, prevState) {
+      // console.log("App componentDidUpdate");
+      // console.log(prevState.contacts);
+      // console.log(this.state.contacts);
+
+      if (prevState.contacts !== this.state.contacts) {
+        console.log('Обновился массив contacts');
+        localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+      }
+    }
+
+
+
   onInputName = (e, option) => {
       const { value } = e.currentTarget;
       // console.log(option);
@@ -86,6 +99,7 @@ export class App extends Component {
     }));
   };
 
+
   render() {
     const filteredContacts = this.onFilterResult();
       return (
@@ -99,8 +113,8 @@ export class App extends Component {
           number={this.state.number}
           onInputName={this.onInputName}
         />
-            <PhonebookContacts>
-              <PhonebookContactsHeading>Contacts</PhonebookContactsHeading>
+        <PhonebookContacts>
+          <PhonebookContactsHeading>Contacts</PhonebookContactsHeading>
            
         <Filter 
           value={this.state.filter} 
